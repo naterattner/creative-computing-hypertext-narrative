@@ -161,7 +161,7 @@ const tags = [
   
   
 
-// Function to handle link clicks
+// Function to handle link clicks for tags
 function handleLinkClick(tag) {
 	// Search for recipes with matching tag in the dictionary
 	const matchingRecipes = [];
@@ -173,14 +173,45 @@ function handleLinkClick(tag) {
 	}
 
 	if (matchingRecipes.length > 0) {
-		console.log(`Recipes matching ${tag}:`, matchingRecipes);
-		
 		// Randomly select one recipe from matchingRecipes
 		const randomIndex = Math.floor(Math.random() * matchingRecipes.length);
 		const selectedRecipe = matchingRecipes[randomIndex];
-		console.log(`Randomly selected recipe matching ${tag}:`, selectedRecipe);
+
+		// Update the <h1> element with the name of the selected recipe
+		const recipeNameElement = document.getElementById("recipeName");
+		recipeNameElement.textContent = selectedRecipe.title;
+
+		// Replace the content of the myDiv element with new links for the tags
+		const myDiv = document.getElementById("myDiv");
+		myDiv.innerHTML = ""; // Clear existing content
+
+		selectedRecipe.tags.forEach((tag, index) => {
+			// Create a new anchor element for the tag
+			const link = document.createElement("a");
+
+			// Set the href to "#" to make it look like a link
+			link.href = "#";
+
+			// Set the text of the link to the tag
+			link.textContent = tag;
+
+			// Add an onclick event handler to call the handleLinkClick function with the tag
+			link.onclick = function () {
+				handleLinkClick(tag);
+				return false; // Prevent the browser from navigating to "#" when clicked
+			};
+
+			// Append the link to myDiv
+			myDiv.appendChild(link);
+
+			// Add a space after each link (except the last one)
+			if (index < selectedRecipe.tags.length - 1) {
+				myDiv.appendChild(document.createTextNode(" "));
+			}
+		});
 
 		// Print each field of the selected recipe on separate lines
+		console.log(`Randomly selected recipe matching ${tag}:`);
 		console.log(`Name: ${selectedRecipe.title}`);
 		console.log(`Author: ${selectedRecipe.author}`);
 		console.log(`Total Time: ${selectedRecipe.totalTime} minutes`);
