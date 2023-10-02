@@ -1,12 +1,13 @@
 body {
   /* color: #171717; */
   background-color: #eddfcb;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
   font-size: 36px;
   color: #333333;
-  /* font-family: monospace; */
+  font-family: 'Archivo' !important;
 }
 
 .metadata {
