@@ -181,6 +181,23 @@ function handleLinkClick(tag) {
 		const recipeNameElement = document.getElementById("recipeName");
 		recipeNameElement.textContent = selectedRecipe.title;
 
+		// Update the author element
+		const authorElement = document.querySelector(".author");
+		authorElement.textContent = "By " + selectedRecipe.author;
+
+		// Update the total time element
+		const totalTimeElement = document.querySelector(".totalTime");
+		totalTimeElement.textContent = selectedRecipe.totalTime + " minutes";
+
+		// Update the rating element
+		const ratingElement = document.querySelector(".rating");
+		ratingElement.textContent = "Rating: " + selectedRecipe.rating + "/10";
+
+		// Update the link element
+		const linkElement = document.querySelector(".link a");
+		linkElement.href = selectedRecipe.link;
+        linkElement.textContent = "Click to read recipe";
+
 		// Replace the content of the myDiv element with new links for the tags
 		const myDiv = document.getElementById("myDiv");
 		myDiv.innerHTML = ""; // Clear existing content

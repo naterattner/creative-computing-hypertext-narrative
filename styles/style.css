@@ -1,8 +1,25 @@
 body {
-  color: red;
+  /* color: #171717; */
+  background-color: #eddfcb;
 }
 
 h1 {
-  color: red;
-  font-family: monospace;
+  font-size: 36px;
+  color: #333333;
+  /* font-family: monospace; */
+}
+
+.metadata {
+  color: #333333;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+#myDiv a {
+  font-size: 17px;
+  color: #800020;
+  text-decoration: underline;
+  text-decoration-thickness: 0.75px;
+  margin-right: 4px;
+  line-height: 1.5;
 }
