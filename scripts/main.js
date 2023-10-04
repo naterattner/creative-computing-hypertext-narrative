@@ -1,4 +1,5 @@
-import { recipes, tags } from './data.js';
+import { tags } from './tags.js';
+import { recipes } from './recipes.js';
 
 // Function to handle link clicks for tags
 function handleLinkClick(tag) {
