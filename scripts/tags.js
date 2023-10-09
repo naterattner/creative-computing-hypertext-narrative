@@ -94,6 +94,13 @@
 // 	"Tailgate",
 // 	];
 
+function shuffleArray(array) {
+	for (let i = array.length - 1; i > 0; i--) {
+	  const j = Math.floor(Math.random() * (i + 1));
+	  [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+	}
+  }
+
 export const tags = [
 	"Pastas", "Harissa", "Miso Paste", "Parmesan", "Dinner", "Quick", "Weekday", "Main Course", "Healthy", "Vegetarian",
 	"One Pot", "Broccoli", "Budget", "Caper", "Dry White Wine", "Farro", "Make Ahead", "Parsley", "Lunch", "Side Dish", "Fall", "Spring", "Winter", "Vegan",
@@ -137,3 +144,5 @@ export const tags = [
 	"American", "Salads And Dressings", "Basil", "Bread", "Scallop"
   ]
   
+
+

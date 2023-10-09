@@ -1,5 +1,9 @@
 import { tags } from './tags.js';
-import { recipes } from './recipes.js';
+import { recipes } from './recipes.js'
+import { shuffleArray } from './functions.js';
+
+//Randomize the tags (this mutates the array)
+shuffleArray(tags);
 
 // Function to handle link clicks for tags
 function handleLinkClick(tag) {
@@ -85,28 +89,46 @@ function handleLinkClick(tag) {
 // Get the reference to the div where you want to append the links
 const div = document.getElementById("myDiv");
 
-// Loop through the tags array and create a link for each one
-tags.forEach((tag, index) => {
-	// Create a new anchor element
-	const link = document.createElement("a");
+function addTags(array) {
+	// Loop through the tags array and create a link for each one
+	array.forEach((tag, index) => {
+		// Create a new anchor element
+		const link = document.createElement("a");
 
-	// Set the href to "#" to make it look like a link
-	link.href = "#";
+		// Set the href to "#" to make it look like a link
+		link.href = "#";
 
-	// Set the text of the link to the tag
-	link.textContent = tag;
+		// Set the text of the link to the tag
+		link.textContent = tag;
 
-	// Add an onclick event handler to call the handleLinkClick function with the tag
-	link.onclick = function () {
-		handleLinkClick(tag);
-		return false; // Prevent the browser from navigating to "#" when clicked
-	};
+		// Add an onclick event handler to call the handleLinkClick function with the tag
+		link.onclick = function () {
+			handleLinkClick(tag);
+			return false; // Prevent the browser from navigating to "#" when clicked
+		};
 
-	// Append the link to the div
-	div.appendChild(link);
+		// Append the link to the div
+		div.appendChild(link);
 
-	// Add a space after each link (except the last one)
-	if (index < tags.length - 1) {
-		div.appendChild(document.createTextNode(" "));
-	}
+		// Add a space after each link (except the last one)
+		if (index < tags.length - 1) {
+			div.appendChild(document.createTextNode(" "));
+		}
+	});
+}
+
+addTags(tags);
+
+
+// Get a reference to the shuffle button
+const shuffleButton = document.getElementById("shuffle-button");
+
+// Add a click event listener to the first button
+shuffleButton.addEventListener("click", function () {
+  // Call the shuffleArray function on the 'tags' variable
+  shuffleArray(tags);
+  console.log("Shuffled tags:", tags); // You can replace this with your desired action
+  //Empty div 
+  div.innerHTML = "";
+  addTags(tags);
 });
