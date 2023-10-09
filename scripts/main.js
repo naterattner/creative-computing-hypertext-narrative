@@ -72,20 +72,100 @@ function handleLinkClick(tag) {
 		});
 
 		// Print each field of the selected recipe on separate lines
-		console.log(`Randomly selected recipe matching ${tag}:`);
-		console.log(`Name: ${selectedRecipe.title}`);
-		console.log(`Author: ${selectedRecipe.author}`);
-		console.log(`Total Time: ${selectedRecipe.totalTime} minutes`);
-		console.log(`Rating: ${selectedRecipe.rating}`);
-		console.log(`Link: ${selectedRecipe.link}`);
-		console.log(`Tags: ${selectedRecipe.tags.join(", ")}`);
+		// console.log(`Randomly selected recipe matching ${tag}:`);
+		// console.log(`Name: ${selectedRecipe.title}`);
+		// console.log(`Author: ${selectedRecipe.author}`);
+		// console.log(`Total Time: ${selectedRecipe.totalTime} minutes`);
+		// console.log(`Rating: ${selectedRecipe.rating}`);
+		// console.log(`Link: ${selectedRecipe.link}`);
+		// console.log(`Tags: ${selectedRecipe.tags.join(", ")}`);
+
+		// Append the selected recipe as a link to the breadcrumbs div
+		const breadcrumbsDiv = document.querySelector(".breadcrumbs"); // Use "." for class selector
+		const recipeLink = document.createElement("a");
+		recipeLink.href = "#"; // Set href to "#" to prevent navigation
+		recipeLink.textContent = selectedRecipe.title;
+		breadcrumbsDiv.appendChild(recipeLink);
+
+		// Add a separator (e.g., ">" character) between breadcrumbs
+		const separator = document.createTextNode(" > ");
+		breadcrumbsDiv.appendChild(separator);
+
+		// Add a click event handler for the recipeLink
+		recipeLink.addEventListener("click", function (event) {
+			event.preventDefault(); // Prevent the default navigation behavior
+
+			// Find the matching recipe based on the selected recipe title
+			const matchingRecipe = recipes.find(recipe => recipe.title === selectedRecipe.title);
+
+			// Log the title and link of the matching recipe
+			if (matchingRecipe) {
+				console.log("Selected Recipe Title:", matchingRecipe.title);
+				console.log("Selected Recipe Link:", matchingRecipe.link);
+
+				// Update the <h1> element with the name of the selected recipe
+				recipeNameElement.textContent = matchingRecipe.title;
+
+				// Update the author element
+				authorElement.textContent = "• By " + matchingRecipe.author;
+
+				// Update the total time element
+				totalTimeElement.textContent = "• " + matchingRecipe.totalTime + " minutes";
+
+				// Update the rating element
+				ratingElement.textContent = "• Rating: " + matchingRecipe.rating + "/10";
+
+				// Update the link element
+				linkElement.href = matchingRecipe.link;
+				linkElement.textContent = "• See recipe \u2197";
+
+				// Replace the content of the myDiv element with new links for the tags
+				// const myDiv = document.getElementById("myDiv");
+				myDiv.innerHTML = ""; // Clear existing content
+
+				matchingRecipe.tags.forEach((tag, index) => {
+					// Create a new anchor element for the tag
+					const link = document.createElement("a");
+
+					// Set the href to "#" to make it look like a link
+					link.href = "#";
+
+					// Set the text of the link to the tag
+					link.textContent = tag;
+
+					// Add an onclick event handler to call the handleLinkClick function with the tag
+					link.onclick = function () {
+						handleLinkClick(tag);
+						return false; // Prevent the browser from navigating to "#" when clicked
+					};
+
+					// Append the link to myDiv
+					myDiv.appendChild(link);
+
+					// Add a space after each link (except the last one)
+					if (index < selectedRecipe.tags.length - 1) {
+						myDiv.appendChild(document.createTextNode(" "));
+					}
+				});
+
+
+
+
+
+
+
+
+			} else {
+				console.log("Matching recipe not found.");
+			}
+		});
+
+
 	} else {
 		console.log(`No recipes found for ${tag}`);
 	}
 
-	// Remove the "shuffle" button
-	// const shuffleButton = document.getElementById("shuffle-button");
-	// shuffleButton.remove()
+
 }
 
 // Get the reference to the div where you want to append the links
