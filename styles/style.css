@@ -22,6 +22,24 @@ h1 {
   margin-bottom: 20px;
 }
 
+.breadcrumbs {
+  margin: 5px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #007bff;
+  font-style: italic;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+  color: #0056b3;
+}
+
 .button-container {
   display: flex; /* Use flexbox to align buttons horizontally */
 }
