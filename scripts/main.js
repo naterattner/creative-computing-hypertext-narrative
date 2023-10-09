@@ -83,7 +83,9 @@ function handleLinkClick(tag) {
 		console.log(`No recipes found for ${tag}`);
 	}
 
-	// Add your custom logic here for what should happen when a link is clicked
+	// Remove the "shuffle" button
+	// const shuffleButton = document.getElementById("shuffle-button");
+	// shuffleButton.remove()
 }
 
 // Get the reference to the div where you want to append the links
@@ -123,12 +125,50 @@ addTags(tags);
 // Get a reference to the shuffle button
 const shuffleButton = document.getElementById("shuffle-button");
 
-// Add a click event listener to the first button
+// Grab all the a elements (tags) that are currently on the page
+function getAllLinksTextInMyDiv() {
+	// Get the div element by its ID
+	const myDiv = document.getElementById("myDiv");
+  
+	// Get all the <a> elements within the div
+	const links = Array.from(myDiv.querySelectorAll("a"));
+
+    // Extract and store the inner text of each link
+    const linkTexts = links.map(link => link.innerText);
+  
+	// Shuffle the array of link texts
+	shuffleArray(linkTexts);
+
+	return linkTexts;
+  }
+
+
+// Add a click event listener to the shuffle button
 shuffleButton.addEventListener("click", function () {
-  // Call the shuffleArray function on the 'tags' variable
-  shuffleArray(tags);
-  console.log("Shuffled tags:", tags); // You can replace this with your desired action
-  //Empty div 
-  div.innerHTML = "";
-  addTags(tags);
+	const shuffledLinkTexts = getAllLinksTextInMyDiv();
+    console.log(shuffledLinkTexts); // This will log the array of randomized link texts
+	  //Empty div 
+  	div.innerHTML = "";
+  	addTags(shuffledLinkTexts);
+
+});
+
+
+// Get a reference to the random button
+const randomButton = document.getElementById("random-button");
+
+//Define a function we'll use to get a random tag
+function getRandomTag(array) {
+	const randomIndex = Math.floor(Math.random() * array.length);
+	return array[randomIndex];
+  }
+
+// Add a click event listener to the random button
+randomButton.addEventListener("click", function () {
+  //Get a random tag from the tags array	
+  const randomTag = getRandomTag(tags);
+  console.log(randomTag)
+
+  // Call the handleLinkClick function and pass that random tag
+  handleLinkClick(randomTag)
 });
