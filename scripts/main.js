@@ -36,7 +36,7 @@ function handleLinkClick(tag) {
 		// Update the link element
 		const linkElement = document.querySelector(".link a");
 		linkElement.href = selectedRecipe.link;
-        linkElement.textContent = "See recipe";
+        linkElement.textContent = "See recipe \u2197";
 
 		// Replace the content of the myDiv element with new links for the tags
 		const myDiv = document.getElementById("myDiv");

@@ -16,11 +16,40 @@ h1 {
   line-height: 1.25;
 }
 
+.link a {
+  text-decoration: none;
+  color: #007bff; /* Default text color for links */
+}
+
+.link a:hover {
+  color: #0056b3; /* Default text color for links */
+}
+
+.link a:visited {
+  color: #0056b3; /* Default text color for links */
+}
+
+
+
 #myDiv a {
-  font-size: 17px;
+  /* font-size: 17px;
   color: #800020;
   text-decoration: underline;
   text-decoration-thickness: 0.75px;
   margin-right: 4px;
-  line-height: 1.5;
+  line-height: 1.5; */
+
+  display: inline-block;
+  padding: 4px 8px; /* Adjust the padding to your preference */
+  border-radius: 20px; /* This value controls the roundness of the corners */
+  background-color: #007bff; /* Change to your desired background color */
+  color: #fff; /* Change to your desired text color */
+  text-decoration: none;
+  margin: 3px; /* Add some margin between the links */
+  line-height: 1; /* Set line-height to 1 to reduce vertical space */
+  font-size: 15px;
+}
+
+#myDiv a:hover {
+  background-color: #0056b3; /* Change the hover background color */
 }
