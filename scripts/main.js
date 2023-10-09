@@ -27,20 +27,20 @@ function handleLinkClick(tag) {
 
 		// Update the author element
 		const authorElement = document.querySelector(".author");
-		authorElement.textContent = "By " + selectedRecipe.author;
+		authorElement.textContent = "• By " + selectedRecipe.author;
 
 		// Update the total time element
 		const totalTimeElement = document.querySelector(".totalTime");
-		totalTimeElement.textContent = selectedRecipe.totalTime + " minutes";
+		totalTimeElement.textContent = "• " + selectedRecipe.totalTime + " minutes";
 
 		// Update the rating element
 		const ratingElement = document.querySelector(".rating");
-		ratingElement.textContent = "Rating: " + selectedRecipe.rating + "/10";
+		ratingElement.textContent = "• Rating: " + selectedRecipe.rating + "/10";
 
 		// Update the link element
 		const linkElement = document.querySelector(".link a");
 		linkElement.href = selectedRecipe.link;
-        linkElement.textContent = "See recipe \u2197";
+        linkElement.textContent = "• See recipe \u2197";
 
 		// Replace the content of the myDiv element with new links for the tags
 		const myDiv = document.getElementById("myDiv");
