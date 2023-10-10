@@ -82,7 +82,6 @@ h1 {
 .link a {
   text-decoration: none;
   color: #ad3a76; /* Default text color for links */
-  
 }
 
 .link a:hover {
@@ -94,15 +93,7 @@ h1 {
 }
 
 
-
 #myDiv a {
-  /* font-size: 17px;
-  color: #800020;
-  text-decoration: underline;
-  text-decoration-thickness: 0.75px;
-  margin-right: 4px;
-  line-height: 1.5; */
-
   display: inline-block;
   padding: 4px 8px; /* Adjust the padding to your preference */
   border-radius: 20px; /* This value controls the roundness of the corners */

@@ -148,13 +148,6 @@ function handleLinkClick(tag) {
 					}
 				});
 
-
-
-
-
-
-
-
 			} else {
 				console.log("Matching recipe not found.");
 			}
