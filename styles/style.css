@@ -26,22 +26,23 @@ h1 {
   margin: 5px;
   margin-top: 20px;
   font-size: 14px;
-  color: #007bff;
+  color: #666666;
   font-style: italic;
 }
 
 .breadcrumbs a {
   text-decoration: none;
-  color: #007bff;
+  color: #666666;
   transition: color 0.2s;
 }
 
 .breadcrumbs a:hover {
-  color: #0056b3;
+  color: #ad3a76;
 }
 
 .button-container {
   display: flex; /* Use flexbox to align buttons horizontally */
+  margin-bottom:5px;
 }
 
 .button {
@@ -55,30 +56,30 @@ h1 {
   border-radius: 2px;
   font-size: 14px;
   color: #333333;
-  background-color: #edc894;
+  background-color: #ddb5ca;
   transition: background-color 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 }
 
 
 .button:hover {
   color: #241c15;
-  background-color: #ffffff;
+  background-color: #db9ebe;
 }
 
 
 
 .link a {
   text-decoration: none;
-  color: #007bff; /* Default text color for links */
+  color: #ad3a76; /* Default text color for links */
   
 }
 
 .link a:hover {
-  color: #0056b3; /* Default text color for links */
+  color: #842355; /* Default text color for links */
 }
 
 .link a:visited {
-  color: #0056b3; /* Default text color for links */
+  color: #842355; /* Default text color for links */
 }
 
 
@@ -94,7 +95,7 @@ h1 {
   display: inline-block;
   padding: 4px 8px; /* Adjust the padding to your preference */
   border-radius: 20px; /* This value controls the roundness of the corners */
-  background-color: #007bff; /* Change to your desired background color */
+  background-color: #ad3a76; /* Change to your desired background color */
   color: #fff; /* Change to your desired text color */
   text-decoration: none;
   margin: 3px; /* Add some margin between the links */
@@ -104,5 +105,5 @@ h1 {
 }
 
 #myDiv a:hover {
-  background-color: #0056b3; /* Change the hover background color */
+  background-color: #842355; /* Change the hover background color */
 }

@@ -659,7 +659,7 @@ export const recipes = [
     },
     {
       "title": "Pad Krapow Gai (Thai Basil Chicken)",
-      "author": "",
+      "author": "Kris Yenbamroong",
       "totalTime": "15",
       "rating": "7.5",
       "link": "https://cooking.nytimes.com/recipes/1023437-pad-krapow-gai-thai-basil-chicken",
