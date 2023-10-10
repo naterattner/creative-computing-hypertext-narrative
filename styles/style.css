@@ -48,23 +48,29 @@ h1 {
   padding: 5px 5px; /* Adjust padding as needed */
   margin: 3px; /* Add margin between the buttons */
   margin-bottom:10px;
-  background-color: #ffffff;
-  border: 1px solid #007bff; /* Add a border with your desired color */
-  color: #007bff; /* Button text color */
-  border-radius: 4px; /* Rounded corners */
+  outline: none;
   cursor: pointer;
-  text-decoration: none;
-  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #333333;
+  background-color: #edc894;
+  transition: background-color 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 }
 
+
 .button:hover {
-  background-color: #007bff; /* Change the background color on hover */
-  color: #fff; /* Change text color on hover */
+  color: #241c15;
+  background-color: #ffffff;
 }
+
+
 
 .link a {
   text-decoration: none;
   color: #007bff; /* Default text color for links */
+  
 }
 
 .link a:hover {
@@ -94,6 +100,7 @@ h1 {
   margin: 3px; /* Add some margin between the links */
   line-height: 1.1; /* Set line-height to 1 to reduce vertical space */
   font-size: 15px;
+  transition: background-color 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 }
 
 #myDiv a:hover {
