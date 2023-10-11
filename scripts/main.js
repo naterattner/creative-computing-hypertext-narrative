@@ -5,243 +5,109 @@ import { shuffleArray } from './functions.js';
 //Randomize the tags (this mutates the array)
 shuffleArray(tags);
 
-// Function to handle link clicks for tags
-function handleLinkClick(tag) {
-	// Search for recipes with matching tag in the dictionary
-	const matchingRecipes = [];
+const recipeNameElement = document.getElementById("recipeName");
+const authorElement = document.querySelector(".author");
+const totalTimeElement = document.querySelector(".totalTime");
+const linkElement = document.querySelector(".link a");
+const myDiv = document.getElementById("myDiv");
+const breadcrumbsDiv = document.querySelector(".breadcrumbs");
+const div = document.getElementById("myDiv");
+const shuffleButton = document.getElementById("shuffle-button");
+const randomButton = document.getElementById("random-button");
 
-	for (const recipe of recipes) {
-		if (recipe.tags.includes(tag)) {
-			matchingRecipes.push(recipe);
-		}
-	}
-
-	if (matchingRecipes.length > 0) {
-		// Randomly select one recipe from matchingRecipes
-		const randomIndex = Math.floor(Math.random() * matchingRecipes.length);
-		const selectedRecipe = matchingRecipes[randomIndex];
-
-		// Update the <h1> element with the name of the selected recipe
-		const recipeNameElement = document.getElementById("recipeName");
-		recipeNameElement.textContent = selectedRecipe.title;
-
-		// Update the author element
-		const authorElement = document.querySelector(".author");
-		authorElement.textContent = "By " + selectedRecipe.author;
-
-		// Update the total time element
-		const totalTimeElement = document.querySelector(".totalTime");
-		totalTimeElement.textContent = selectedRecipe.totalTime + " minutes";
-
-		// Update the rating element
-		// const ratingElement = document.querySelector(".rating");
-		// ratingElement.textContent = "• Rating: " + selectedRecipe.rating + "/10";
-
-		// Update the link element
-		const linkElement = document.querySelector(".link a");
-		linkElement.href = selectedRecipe.link;
-        linkElement.textContent = "See recipe \u2197";
-
-		// Replace the content of the myDiv element with new links for the tags
-		const myDiv = document.getElementById("myDiv");
-		myDiv.innerHTML = ""; // Clear existing content
-
-		selectedRecipe.tags.forEach((tag, index) => {
-			// Create a new anchor element for the tag
-			const link = document.createElement("a");
-
-			// Set the href to "#" to make it look like a link
-			link.href = "#";
-
-			// Set the text of the link to the tag
-			link.textContent = tag;
-
-			// Add an onclick event handler to call the handleLinkClick function with the tag
-			link.onclick = function () {
-				handleLinkClick(tag);
-				return false; // Prevent the browser from navigating to "#" when clicked
-			};
-
-			// Append the link to myDiv
-			myDiv.appendChild(link);
-
-			// Add a space after each link (except the last one)
-			if (index < selectedRecipe.tags.length - 1) {
-				myDiv.appendChild(document.createTextNode(" "));
-			}
-		});
-
-		// Print each field of the selected recipe on separate lines
-		// console.log(`Randomly selected recipe matching ${tag}:`);
-		// console.log(`Name: ${selectedRecipe.title}`);
-		// console.log(`Author: ${selectedRecipe.author}`);
-		// console.log(`Total Time: ${selectedRecipe.totalTime} minutes`);
-		// console.log(`Rating: ${selectedRecipe.rating}`);
-		// console.log(`Link: ${selectedRecipe.link}`);
-		// console.log(`Tags: ${selectedRecipe.tags.join(", ")}`);
-
-		// Append the selected recipe as a link to the breadcrumbs div
-		const breadcrumbsDiv = document.querySelector(".breadcrumbs"); // Use "." for class selector
-		const recipeLink = document.createElement("a");
-		recipeLink.href = "#"; // Set href to "#" to prevent navigation
-		recipeLink.textContent = selectedRecipe.title;
-		breadcrumbsDiv.appendChild(recipeLink);
-
-		// Add a separator (e.g., ">" character) between breadcrumbs
-		const separator = document.createTextNode(" > ");
-		breadcrumbsDiv.appendChild(separator);
-
-		// Add a click event handler for the recipeLink
-		recipeLink.addEventListener("click", function (event) {
-			event.preventDefault(); // Prevent the default navigation behavior
-
-			// Find the matching recipe based on the selected recipe title
-			const matchingRecipe = recipes.find(recipe => recipe.title === selectedRecipe.title);
-
-			// Log the title and link of the matching recipe
-			if (matchingRecipe) {
-				console.log("Selected Recipe Title:", matchingRecipe.title);
-				console.log("Selected Recipe Link:", matchingRecipe.link);
-
-				// Update the <h1> element with the name of the selected recipe
-				recipeNameElement.textContent = matchingRecipe.title;
-
-				// Update the author element
-				authorElement.textContent = "By " + matchingRecipe.author;
-
-				// Update the total time element
-				totalTimeElement.textContent = matchingRecipe.totalTime + " minutes";
-
-				// Update the rating element
-				// ratingElement.textContent = "• Rating: " + matchingRecipe.rating + "/10";
-
-				// Update the link element
-				linkElement.href = matchingRecipe.link;
-				linkElement.textContent = "See recipe \u2197";
-
-				// Replace the content of the myDiv element with new links for the tags
-				// const myDiv = document.getElementById("myDiv");
-				myDiv.innerHTML = ""; // Clear existing content
-
-				matchingRecipe.tags.forEach((tag, index) => {
-					// Create a new anchor element for the tag
-					const link = document.createElement("a");
-
-					// Set the href to "#" to make it look like a link
-					link.href = "#";
-
-					// Set the text of the link to the tag
-					link.textContent = tag;
-
-					// Add an onclick event handler to call the handleLinkClick function with the tag
-					link.onclick = function () {
-						handleLinkClick(tag);
-						return false; // Prevent the browser from navigating to "#" when clicked
-					};
-
-					// Append the link to myDiv
-					myDiv.appendChild(link);
-
-					// Add a space after each link (except the last one)
-					if (index < selectedRecipe.tags.length - 1) {
-						myDiv.appendChild(document.createTextNode(" "));
-					}
-				});
-
-			} else {
-				console.log("Matching recipe not found.");
-			}
-		});
-
-
-	} else {
-		console.log(`No recipes found for ${tag}`);
-	}
-
-
+function getRandomTag(array) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
 }
 
-// Get the reference to the div where you want to append the links
-const div = document.getElementById("myDiv");
+function updateUI(selectedRecipe) {
+  recipeNameElement.textContent = selectedRecipe.title;
+  authorElement.textContent = "By " + selectedRecipe.author;
+  totalTimeElement.textContent = selectedRecipe.totalTime + " minutes";
+  linkElement.href = selectedRecipe.link;
+  linkElement.textContent = "See recipe \u2197";
+  myDiv.innerHTML = "";
+
+  selectedRecipe.tags.forEach((tag, index) => {
+    const link = document.createElement("a");
+    link.href = "#";
+    link.textContent = tag;
+    link.onclick = () => {
+      handleLinkClick(tag);
+      return false;
+    };
+    myDiv.appendChild(link);
+    if (index < selectedRecipe.tags.length - 1) {
+      myDiv.appendChild(document.createTextNode(" "));
+    }
+  });
+}
+
+function handleLinkClick(tag) {
+  const matchingRecipes = recipes.filter(recipe => recipe.tags.includes(tag));
+
+  if (matchingRecipes.length > 0) {
+    const randomIndex = Math.floor(Math.random() * matchingRecipes.length);
+    const selectedRecipe = matchingRecipes[randomIndex];
+    updateUI(selectedRecipe);
+    
+    const recipeLink = document.createElement("a");
+    recipeLink.href = "#";
+    recipeLink.textContent = selectedRecipe.title;
+    breadcrumbsDiv.appendChild(recipeLink);
+    const separator = document.createTextNode(" > ");
+    breadcrumbsDiv.appendChild(separator);
+    
+    recipeLink.addEventListener("click", event => {
+      event.preventDefault();
+      const matchingRecipe = recipes.find(recipe => recipe.title === selectedRecipe.title);
+      if (matchingRecipe) {
+        updateUI(matchingRecipe);
+      } else {
+        console.log("Matching recipe not found.");
+      }
+    });
+  } else {
+    console.log(`No recipes found for ${tag}`);
+  }
+}
 
 function addTags(array) {
-	// Loop through the tags array and create a link for each one
-	array.forEach((tag, index) => {
-		// Create a new anchor element
-		const link = document.createElement("a");
-
-		// Set the href to "#" to make it look like a link
-		link.href = "#";
-
-		// Set the text of the link to the tag
-		link.textContent = tag;
-
-		// Add an onclick event handler to call the handleLinkClick function with the tag
-		link.onclick = function () {
-			handleLinkClick(tag);
-			return false; // Prevent the browser from navigating to "#" when clicked
-		};
-
-		// Append the link to the div
-		div.appendChild(link);
-
-		// Add a space after each link (except the last one)
-		if (index < tags.length - 1) {
-			div.appendChild(document.createTextNode(" "));
-		}
-	});
+  array.forEach((tag, index) => {
+    const link = document.createElement("a");
+    link.href = "#";
+    link.textContent = tag;
+    link.onclick = () => {
+      handleLinkClick(tag);
+      return false;
+    };
+    div.appendChild(link);
+    if (index < tags.length - 1) {
+      div.appendChild(document.createTextNode(" "));
+    }
+  });
 }
 
 addTags(tags);
 
-
-// Get a reference to the shuffle button
-const shuffleButton = document.getElementById("shuffle-button");
-
-// Grab all the a elements (tags) that are currently on the page
 function getAllLinksTextInMyDiv() {
-	// Get the div element by its ID
-	const myDiv = document.getElementById("myDiv");
-  
-	// Get all the <a> elements within the div
 	const links = Array.from(myDiv.querySelectorAll("a"));
-
-    // Extract and store the inner text of each link
-    const linkTexts = links.map(link => link.innerText);
-  
-	// Shuffle the array of link texts
-	shuffleArray(linkTexts);
-
+	const linkTexts = links.map(link => link.innerText);
+	console.log(linkTexts)
 	return linkTexts;
   }
 
+shuffleButton.addEventListener("click", () => {
+  const shuffledLinkTexts = getAllLinksTextInMyDiv();
 
-// Add a click event listener to the shuffle button
-shuffleButton.addEventListener("click", function () {
-	const shuffledLinkTexts = getAllLinksTextInMyDiv();
-    console.log(shuffledLinkTexts); // This will log the array of randomized link texts
-	  //Empty div 
-  	div.innerHTML = "";
-  	addTags(shuffledLinkTexts);
+  // Shuffle the array of link texts
+  shuffleArray(shuffledLinkTexts);
 
+  div.innerHTML = "";
+  addTags(shuffledLinkTexts);
 });
 
-
-// Get a reference to the random button
-const randomButton = document.getElementById("random-button");
-
-//Define a function we'll use to get a random tag
-function getRandomTag(array) {
-	const randomIndex = Math.floor(Math.random() * array.length);
-	return array[randomIndex];
-  }
-
-// Add a click event listener to the random button
-randomButton.addEventListener("click", function () {
-  //Get a random tag from the tags array	
+randomButton.addEventListener("click", () => {
   const randomTag = getRandomTag(tags);
-  console.log(randomTag)
-
-  // Call the handleLinkClick function and pass that random tag
-  handleLinkClick(randomTag)
+  handleLinkClick(randomTag);
 });
