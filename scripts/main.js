@@ -5,6 +5,7 @@ import { shuffleArray } from './functions.js';
 //Randomize the tags (this mutates the array)
 shuffleArray(tags);
 
+
 const recipeNameElement = document.getElementById("recipeName");
 const authorElement = document.querySelector(".author");
 const totalTimeElement = document.querySelector(".totalTime");
